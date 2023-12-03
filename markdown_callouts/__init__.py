@@ -20,7 +20,7 @@ class _CalloutsBlockProcessor(BlockQuoteProcessor):
         return (
             m is not None
             and (m[1] or not self.parser.state.isstate("blockquote"))
-            and not util.nearing_recursion_limit()  # type: ignore
+            and not util.nearing_recursion_limit()
         )
 
     def run(self, parent: etree.Element, blocks: list[str]) -> None:
@@ -144,7 +144,7 @@ class CalloutsExtension(Extension):
         super().__init__(**kwargs)
 
     def extendMarkdown(self, md: Markdown) -> None:
-        parser = md.parser  # type: ignore
+        parser = md.parser
         parser.blockprocessors.register(
             _CalloutsBlockProcessor(parser),
             "callouts",
@@ -157,4 +157,4 @@ class CalloutsExtension(Extension):
         )
 
 
-makeExtension = CalloutsExtension
+makeExtension = CalloutsExtension  # noqa: N816
